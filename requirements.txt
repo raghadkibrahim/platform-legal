@@ -1,0 +1,20 @@
+fastapi==0.115.4
+uvicorn[standard]==0.30.6
+pydantic==2.9.2
+pydantic-settings==2.5.2
+python-dotenv==1.0.1
+
+# database (you can switch to Postgres later)
+sqlalchemy==2.0.36
+alembic==1.13.3
+
+# auth (JWT)
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+email-validator==2.2.0
+
+# http client for external/AI services
+httpx==0.27.2
+
+# logging & utils
+loguru==0.7.2

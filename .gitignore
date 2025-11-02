@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+.build/
+dist/
+build/
+# Environments & tooling
+.venv/
+venv/
+.env
+.env.*
+*.env
+.ipynb_checkpoints/
+.alembic/
+
+# Cache & logs
+*.log
+.cache/
+.mypy_cache/
+.pytest_cache/
+
+# IDE/OS
+.DS_Store
+.vscode/
+.idea/
+
+# SQLite (local dev DB)
+app.db
+app.db-*
+
+# Uvicorn reload artefacts
+.reload/
+
+# Coverage
+htmlcov/
+.coverage*
+.pytype/
+
+# Node (if you add a frontend later)
+node_modules/
