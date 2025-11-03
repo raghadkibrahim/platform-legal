@@ -1,17 +1,29 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from loguru import logger
-from app.core.config import settings
 from app.api.router import api_router
 
-app = FastAPI(title=settings.PROJECT_NAME)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    logger.info("Starting API")
+    yield
+    logger.info("Shutting down API")
 
-@app.on_event("startup")
-async def startup_event():
-    logger.info(f"Starting {settings.PROJECT_NAME} in {settings.ENV} mode")
+app = FastAPI(title="Platform Legal API", lifespan=lifespan)
 
-app.include_router(api_router, prefix=settings.API_V1_STR)
+# DEV: open CORS fully so we can eliminate CORS as a variable
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# root
+# Mount API at /api/v1
+app.include_router(api_router, prefix="/api/v1")
+
 @app.get("/", tags=["root"])
-def read_root():
-    return {"name": settings.PROJECT_NAME, "api": settings.API_V1_STR}
+def root():
+    return {"ok": True}
